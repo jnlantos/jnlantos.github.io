@@ -42,19 +42,16 @@
 		<style>
 		.demo-card-wide.mdl-card {
 		  width: 90%;
-		}
-		.demo-card-wide > .mdl-card__title {
-		  color: #fff;
-		  height: 80%;
-/*		  background: url('../assets/demos/welcome_card.jpg') center / cover;*/
-		}
-		.demo-card-wide > .mdl-card__menu {
-		  color: #fff;
+		  display: flex;
+  		  box-sizing:border-box;
+  		  align-items: center;
 		}
 		</style>
+
 		<div class="mdl-grid">
 			<div class="mdl-layout-spacer"></div>
 				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
+				<div class="mdl-card__title"></div>
 				  <div class="mdl-card__supporting-text">
 				   <p class="about"> Hello there! I am currently a student at the University of Toronto studying Computer Science. It's a lot of fun! I also like to dabble in other disciplines now and then because I really enjoy learning new things. Feel free to check me out on <a href="http://www.linkedin.com/in/jasminlantos">linkedin</a> and <a href="http://www.github.com/jnlantos/">github</a> if you want to learn more about what I do!</p>
 				  </div>
