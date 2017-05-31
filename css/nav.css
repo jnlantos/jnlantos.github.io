@@ -18,8 +18,8 @@ h1{
 
 #wrap {
   	margin: 10px auto;
-    	padding: 10px;
-    	width: 700px;
+    padding: 10px;
+    width: 700px;
 }
 
 #header {
@@ -33,32 +33,34 @@ h1{
 
 #logo { 
 	line-height: 40px;    
-   	padding: 5px;
+  padding: 5px 0;
 }
 
 #nav {
 	background-color: #191E28;
+  padding: 20px 0;
 }
 
 #nav ul {
-  	margin: 0 50px 0 0;
+  margin: 0 50px 0 0;
 	padding: 0;  
 }
 
 #nav li {
  	float: right;
 	padding: 3px 8px;
-	margin: 0 10px 0 0;
-    	background-color: #191E28;
+	margin: 30px 0;
+/*    	background-color: #191E28;*/
     	list-style-type: none;
 	border-radius:3px;
 	font-family: 'Muli', sans-serif;;
 
 }
 
-#nav li a {  
+#nav li button {
 	text-decoration: none;
 	color: #FFF;
+  font-family: 'Muli', sans-serif;
 }
 
 .hvr-float {
@@ -110,16 +112,16 @@ visibility: hidden;
 }
 
 .about{
-	font-size: 40px;
+	font-size: 25px;
 	font-style: uppercase;
 	font-family: 'Oxygen', bold;
-	line-height: 70px;
+	line-height: 40px;
 }
 
 .projects{}
 
 .space{
-	padding-top: 50px;
+	padding-top: 150px;
 }
 .next{
 	margin-top: -300px;
