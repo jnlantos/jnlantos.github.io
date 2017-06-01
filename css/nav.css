@@ -217,3 +217,11 @@ br.clearLeft {
   -webkit-animation-direction: normal, alternate;
   animation-direction: normal, alternate;
 }
+
+#project1 {
+  background: url('images/project1.png') center / cover;
+}
+
+#project2 {
+  background: url('images/project2.png') center / cover;
+}

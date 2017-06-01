@@ -16,36 +16,39 @@
 	<link href="css/nav.css" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Muli|Oxygen' rel='stylesheet' type='text/css'>
 
-	<script type="text/javascript" src="excanvas.js"></script>
 	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+	<script src="scripts/main.js"></script>
+
 </head>
 
 <body>
-		<div class="fixed-nav-bar">
-			<div id="nav">
-				<ul id="menu">
-					<p id="header">Jasmin Lantos</p>
+	<div class="fixed-nav-bar">
+		<div id="nav">
+			<ul id="menu">
+				<p id="header">Jasmin Lantos</p>
 
-					<li id="projects"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Projects</button></li>
-					<li id="about"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">About</button></li>
-				</ul>
-    		</div>
+				<li id="projects"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goProjects()">Projects</button></li>
+				<li id="about"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goAbout()">About</button></li>
+			</ul>
 		</div>
+	</div>
 
-		<div class="space"><div>
-			<!-- Wide card with share menu button -->
+	<div id="about_page">
+
+		<div class="space"></div>
+
 		<style>
-		.demo-card-wide.mdl-card {
-		  width: 90%;
-		  display: flex;
-  		  box-sizing:border-box;
-  		  align-items: center;
-		}
+			.demo-card-wide.mdl-card {
+			  width: 90%;
+			  display: flex;
+				  box-sizing:border-box;
+				  align-items: center;
+			}
 		</style>
 
 		<div class="mdl-grid">
@@ -53,18 +56,38 @@
 				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
 				<div class="mdl-card__title"></div>
 				  <div class="mdl-card__supporting-text">
-				   <p class="about"> Hello there! I am currently a student at the University of Toronto studying Computer Science. It's a lot of fun! I also like to dabble in other disciplines now and then because I really enjoy learning new things. Feel free to check me out on <a href="http://www.linkedin.com/in/jasminlantos">linkedin</a> and <a href="http://www.github.com/jnlantos/">github</a> if you want to learn more about what I do!</p>
+				  	<p class="about"> Hello there! I am currently a student at the University of Toronto studying Computer Science. It's a lot of fun! I also like to dabble in other disciplines now and then because I really enjoy learning new things. Feel free to check me out on <a href="http://www.linkedin.com/in/jasminlantos">linkedin</a> and <a href="http://www.github.com/jnlantos/">github</a> if you want to learn more about what I do!</p>
 				  </div>
 				</div>
 			<div class="mdl-layout-spacer"></div>
 		</div>
+	</div>
 
 
+	<div id="projects_page">
+		<div class="space"><div>
 
+		<div class="mdl-grid">
+			<div class="mdl-layout-spacer"></div>
+				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
+				<img src="images/project1.png" alt="Smiley face"/>
+				<div class="mdl-card__title"></div>
+				  <div class="mdl-card__supporting-text">
+				  	<p class="about">Auroras</p>
+				  </div>
+				</div>
 
-
+				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
+				<img src="images/project1.png" alt="Smiley face"/>
+				<div class="mdl-card__title"></div>
+				  <div class="mdl-card__supporting-text">
+				  	<p class="about">Auroras</p>
+				  </div>
+				</div>
+			<div class="mdl-layout-spacer"></div>
 		</div>
 	</div>
+
 </body>
 
 </html>
