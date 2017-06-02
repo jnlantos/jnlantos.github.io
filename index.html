@@ -38,18 +38,36 @@
 		</div>
 	</div>
 
+	<style>
+		.demo-card-wide.mdl-card {
+		  width: 90%;
+		  display: flex;
+			  box-sizing:border-box;
+			  align-items: center;
+		}
+
+		#project1 {
+		  width: 100%;
+		  height: 100%;
+		  background: url('images/project1.png') center / cover;
+		}
+
+		#project2 {
+		  width: 100%;
+		  height: 100%;
+		  background: url('images/project1.png') center / cover;
+		}
+
+		#project3 {
+		  width: 100%;
+		  height: 100%;
+		  background: url('images/project1.png') center / cover;
+		}
+	</style>
+
 	<div id="about_page">
 
 		<div class="space"></div>
-
-		<style>
-			.demo-card-wide.mdl-card {
-			  width: 90%;
-			  display: flex;
-				  box-sizing:border-box;
-				  align-items: center;
-			}
-		</style>
 
 		<div class="mdl-grid">
 			<div class="mdl-layout-spacer"></div>
@@ -65,21 +83,34 @@
 
 
 	<div id="projects_page">
-		<div class="space"><div>
+		<div class="space"></div>
 
 		<div class="mdl-grid">
 			<div class="mdl-layout-spacer"></div>
 				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<img src="images/project1.png" alt="Smiley face"/>
-				<div class="mdl-card__title"></div>
+				<div id="project1" class="mdl-card__title"></div>
 				  <div class="mdl-card__supporting-text">
 				  	<p class="about">Auroras</p>
 				  </div>
 				</div>
+			<div class="mdl-layout-spacer"></div>
+		</div>
 
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<img src="images/project1.png" alt="Smiley face"/>
-				<div class="mdl-card__title"></div>
+		<div class="mdl-grid">
+			<div class="mdl-layout-spacer"></div>
+				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp project2">
+				<div id="project2" class="mdl-card__title"></div>
+				  <div class="mdl-card__supporting-text">
+				  	<p class="about">Auroras</p>
+				  </div>
+				</div>
+			<div class="mdl-layout-spacer"></div>
+		</div>
+
+		<div class="mdl-grid">
+			<div class="mdl-layout-spacer"></div>
+				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp project3">
+				<div id="project3" class="mdl-card__title"></div>
 				  <div class="mdl-card__supporting-text">
 				  	<p class="about">Auroras</p>
 				  </div>
