@@ -119,6 +119,14 @@ visibility: hidden;
 	line-height: 40px;
 }
 
+.desc{
+  font-size: 18px;
+  font-style: uppercase;
+  font-family: 'Muli', sans-serif;
+  line-height: 40px;
+  text-align: left;
+}
+
 .projects{}
 
 .space{

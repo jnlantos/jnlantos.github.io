@@ -32,7 +32,7 @@
 			<ul id="menu">
 				<p id="header">Jasmin Lantos</p>
 
-				<li id="projects"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goProjects()">Projects</button></li>
+				<li id="projects"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goProjects()">Current Projects</button></li>
 				<li id="about"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goAbout()">About</button></li>
 			</ul>
 		</div>
@@ -41,28 +41,22 @@
 	<style>
 		.demo-card-wide.mdl-card {
 		  width: 90%;
-		  display: flex;
-			  box-sizing:border-box;
-			  align-items: center;
+		  align-items: center;
+		}
+
+		.project{
+		  width: 100%;
+		  height: 200px;
 		}
 
 		#project1 {
-		  width: 100%;
-		  height: 100%;
-		  background: url('images/project1.png') center / cover;
+		  background: url('images/project1.jpg') center /cover;
 		}
 
 		#project2 {
-		  width: 100%;
-		  height: 100%;
-		  background: url('images/project1.png') center / cover;
+		  background: url('images/project2.png') center / cover;
 		}
 
-		#project3 {
-		  width: 100%;
-		  height: 100%;
-		  background: url('images/project1.png') center / cover;
-		}
 	</style>
 
 	<div id="about_page">
@@ -88,9 +82,11 @@
 		<div class="mdl-grid">
 			<div class="mdl-layout-spacer"></div>
 				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<div id="project1" class="mdl-card__title"></div>
-				  <div class="mdl-card__supporting-text">
-				  	<p class="about">Auroras</p>
+				<div id="project2" class="mdl-card__title project"></div>
+				  <div class="mdl-card__supporting-text about">
+				  	<h1 class="about">Auroras</h1>
+				  	<h3 class="desc">A two player cooperative puzzle game inspired by slavic mythology and Doctor Who</h3>
+				  	<a class="desc" href="http://www.torontogamedevs.com/blog/auroras-the-cosmic-puzzle-game-you-need">Toronto Game Devs</a>
 				  </div>
 				</div>
 			<div class="mdl-layout-spacer"></div>
@@ -98,21 +94,10 @@
 
 		<div class="mdl-grid">
 			<div class="mdl-layout-spacer"></div>
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp project2">
-				<div id="project2" class="mdl-card__title"></div>
+				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
+				<div id="project1" class="mdl-card__title project"></div>
 				  <div class="mdl-card__supporting-text">
-				  	<p class="about">Auroras</p>
-				  </div>
-				</div>
-			<div class="mdl-layout-spacer"></div>
-		</div>
-
-		<div class="mdl-grid">
-			<div class="mdl-layout-spacer"></div>
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp project3">
-				<div id="project3" class="mdl-card__title"></div>
-				  <div class="mdl-card__supporting-text">
-				  	<p class="about">Auroras</p>
+				  	<h1 class="about">VR Travel</h1>
 				  </div>
 				</div>
 			<div class="mdl-layout-spacer"></div>
