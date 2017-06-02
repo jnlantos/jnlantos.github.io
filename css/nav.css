@@ -76,6 +76,14 @@ h1 {
   text-align: left;
 }
 
+.link {
+  font-size: 12px;
+  font-style: uppercase;
+  font-family: 'Muli', sans-serif;
+  line-height: 4px;
+  text-align: left;
+}
+
 .space {
 	padding-top: 150px;
 }
