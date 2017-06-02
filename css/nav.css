@@ -11,29 +11,18 @@ p {
 	font-size: 16px;
 }
 
-h1{
+h1 {
 	font-family: 'Oxygen', bold;
 	text-align: left;
 }
 
-#wrap {
-  	margin: 10px auto;
-    padding: 10px;
-    width: 700px;
-}
-
 #header {
 	margin: 5px 20px;
-	border-radius:3px;
+	border-radius: 3px;
     	background-color: #191E28;
    	color: #FFF;
 	font-family: 'Muli', sans-serif;
 	font-size: 40px;
-}
-
-#logo { 
-	line-height: 40px;    
-  padding: 5px 0;
 }
 
 #nav {
@@ -50,11 +39,9 @@ h1{
  	float: right;
 	padding: 3px 8px;
 	margin: 30px 0;
-/*    	background-color: #191E28;*/
   list-style-type: none;
-	border-radius:3px;
+	border-radius: 3px;
 	font-family: 'Muli', sans-serif;
-
 }
 
 #nav li button {
@@ -62,27 +49,6 @@ h1{
 	color: #FFF;
   font-family: 'Muli', sans-serif, bold;
   font-size: 16px;
-}
-
-.hvr-float {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
-  -webkit-transform: translateY(-8px);
-  transform: translateY(-8px);
 }
 
 .fixed-nav-bar {
@@ -95,31 +61,14 @@ h1{
   background-color: #191E28;
 }
 
-.named-anchor:before {
-display: block;
-content: " ";
-margin-top: -2px;
-height: 70px;
-visibility: hidden;
-}
-
-#side-links {
-	position: fixed;
-	top: 100px;
-	right: 60px;
-	text-align: right;
-	padding-left: 65px;
-
-}
-
-.about{
+.about {
 	font-size: 24px;
 	font-style: uppercase;
   font-family: 'Muli', sans-serif;
 	line-height: 40px;
 }
 
-.desc{
+.desc {
   font-size: 18px;
   font-style: uppercase;
   font-family: 'Muli', sans-serif;
@@ -127,101 +76,6 @@ visibility: hidden;
   text-align: left;
 }
 
-.projects{}
-
-.space{
+.space {
 	padding-top: 150px;
-}
-
-.next{
-	margin-top: -300px;
-	margin-left: -200px;
-	margin-bottom: -300px;
-}
-
-br.clearLeft {
-   clear: left;        
-}
-
-.bigNum {
-  font-size: 20px;
-	color: #000;
- 	background: #FFF;
-	padding: 2px;    
-}
-
-/* Hang */
-@-webkit-keyframes hvr-hang {
-  0% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
-  }
-
-  50% {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
-  }
-
-  100% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
-  }
-}
-
-@keyframes hvr-hang {
-  0% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
-  }
-
-  50% {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
-  }
-
-  100% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
-  }
-}
-
-@-webkit-keyframes hvr-hang-sink {
-  100% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
-  }
-}
-
-@keyframes hvr-hang-sink {
-  100% {
-    -webkit-transform: translateY(8px);
-    transform: translateY(8px);
-  }
-}
-
-.hvr-hang {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-}
-.hvr-hang:hover, .hvr-hang:focus, .hvr-hang:active {
-  -webkit-animation-name: hvr-hang-sink, hvr-hang;
-  animation-name: hvr-hang-sink, hvr-hang;
-  -webkit-animation-duration: .3s, 1.5s;
-  animation-duration: .3s, 1.5s;
-  -webkit-animation-delay: 0s, .3s;
-  animation-delay: 0s, .3s;
-  -webkit-animation-timing-function: ease-out, ease-in-out;
-  animation-timing-function: ease-out, ease-in-out;
-  -webkit-animation-iteration-count: 1, infinite;
-  animation-iteration-count: 1, infinite;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-direction: normal, alternate;
-  animation-direction: normal, alternate;
 }
