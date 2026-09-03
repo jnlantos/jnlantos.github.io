@@ -227,6 +227,7 @@ a {
 /* ---------- name wordmark ---------- */
 
 .name {
+	position: relative;
 	margin: 0 0 1.5rem;
 	font-family: var(--font-display);
 	font-weight: 600;
@@ -262,7 +263,7 @@ a {
 	bottom: 100%;
 	width: 0.46em;
 	height: 0.46em;
-	transform: translate(-50%, 108%);
+	translate: -50% 108%;
 	background-color: var(--accent);
 	-webkit-mask: var(--flower) center / contain no-repeat;
 	mask: var(--flower) center / contain no-repeat;
@@ -293,6 +294,64 @@ a {
 	border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
 	transform: rotate(4deg);
 	pointer-events: none;
+}
+
+/* ---------- jasmine burst on the flower-i ---------- */
+
+/* invisible hit target sized over the flower by JS */
+.egg-trigger {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	border-radius: 50%;
+}
+
+.egg-trigger:focus-visible {
+	outline: 2px solid var(--accent-text);
+	outline-offset: 2px;
+}
+
+/* the flower "pops" — scale/rotate compose over the base translate above */
+.ji.pop::before {
+	animation: ji-pop 0.55s cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+@keyframes ji-pop {
+	0%, 100% { scale: 1; rotate: 0deg; }
+	40% { scale: 1.9; rotate: -18deg; }
+}
+
+/* the particle canvas (created by JS, inert) */
+.fx {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 55;
+}
+
+/* the few flowers that settle on the page and linger — the same masked shape
+   as the flower on the "i", tinted per flower by JS */
+.settled {
+	position: absolute;
+	width: clamp(13px, 3vw, 20px);
+	aspect-ratio: 1;
+	pointer-events: none;
+	z-index: 1;
+	background-color: var(--accent);
+	-webkit-mask: var(--flower) center / contain no-repeat;
+	mask: var(--flower) center / contain no-repeat;
+	/* a hairline edge so the pale (white / ivory) flowers read on cream */
+	filter: drop-shadow(0 0 0.6px rgba(40, 36, 30, 0.5));
+	transition: opacity 0.6s ease;
+}
+
+/* reduced-motion fallback flowers float over the viewport, not the page card */
+.settled--loose {
+	position: fixed;
+	z-index: 55;
 }
 
 .bio {
