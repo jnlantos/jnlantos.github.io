@@ -132,14 +132,17 @@ a {
 
 .header-right {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: flex-end;
-	gap: 1rem;
+	justify-content: flex-end;
+	gap: 0.6rem 1rem;
 }
 
 /* ---------- divider tabs ---------- */
 
 .tabs {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 0.4rem;
 }
 
@@ -514,6 +517,93 @@ a {
 
 .card-press a:hover {
 	border-bottom-color: var(--accent);
+}
+
+/* ---------- to-do: a notebook checklist on a taped-in page ---------- */
+
+.todo-page {
+	max-width: 32rem;
+}
+
+.todo-head {
+	margin: 0 0 0.9rem;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-muted);
+}
+
+.todo {
+	position: relative;
+	margin: 0;
+	padding: 0 0 0 2rem;
+	list-style: none;
+}
+
+/* the notebook margin rule */
+.todo::before {
+	content: "";
+	position: absolute;
+	top: -0.3rem;
+	bottom: -0.3rem;
+	left: 1.35rem;
+	width: 1.5px;
+	background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.todo li {
+	position: relative;
+	padding: 0.5rem 0 0.5rem 2rem;
+	font-size: 1rem;
+	line-height: 1.6;
+	border-bottom: 1px dashed var(--line);
+}
+
+.todo li:last-child {
+	border-bottom: 0;
+}
+
+/* the checkbox */
+.todo li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.62rem;
+	width: 1.05rem;
+	height: 1.05rem;
+	border: 1.5px solid var(--ink-muted);
+	border-radius: 3px;
+}
+
+/* done — pink tick + struck-through, muted text */
+.todo li.todo-done {
+	color: var(--ink-muted);
+	text-decoration: line-through;
+	text-decoration-color: color-mix(in srgb, var(--ink-muted) 55%, transparent);
+}
+
+.todo li.todo-done::after {
+	content: "";
+	position: absolute;
+	left: 0.3rem;
+	top: 0.62rem;
+	width: 0.38rem;
+	height: 0.72rem;
+	border: solid var(--accent);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+/* in progress — a pink dash in the box */
+.todo li.todo-wip::after {
+	content: "";
+	position: absolute;
+	left: 0.28rem;
+	top: 1.08rem;
+	width: 0.5rem;
+	height: 2px;
+	background: var(--accent);
 }
 
 /* ---------- footer ---------- */
