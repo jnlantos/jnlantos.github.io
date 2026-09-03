@@ -1,89 +1,203 @@
+/* ---------- design tokens ---------- */
+:root {
+	--ink: #191E28;
+	--paper: #F5F5F5;
+	--surface: #FFFFFF;
+	--accent: #FF4081;        /* Material "indigo-pink" accent, carried over from the old MDL theme */
+	--accent-dark: #F50057;
+	--radius: 3px;
+	--nav-gutter: clamp(16px, 5vw, 50px);   /* nav padding-x and .menu right edge, kept equal */
+	--shadow-2dp: 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px rgba(0, 0, 0, .12);
+	--shadow-4dp: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+	--shadow-8dp: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 body {
- 	background-color: #F5F5F5;
- 	color: #191E28;
-  	font-family: 'Bembo MT W01 Semibold', Arial, Helvetica, sans-serif;
+	margin: 0;
+	background-color: var(--paper);
+	color: var(--ink);
+	font-family: 'Mulish', sans-serif;
 	text-align: center;
 }
 
 p {
 	text-align: justify;
-	font-family: 'Muli', sans-serif;
 	font-size: 16px;
 }
 
 h1 {
-	font-family: 'Oxygen', bold;
+	font-family: 'Oxygen', sans-serif;
+	font-weight: 700;
 	text-align: left;
 }
 
-#header {
-	margin: 5px 20px;
-	border-radius: 3px;
-    	background-color: #191E28;
-   	color: #FFF;
-	font-family: 'Muli', sans-serif;
-	font-size: 40px;
+a {
+	color: var(--accent-dark);
 }
 
-#nav {
-	background-color: #191E28;
-  padding: 20px 0;
+button {
+	font-family: inherit;
 }
 
-#nav ul {
-  margin: 0 50px 0 0;
-	padding: 0;  
-}
-
-#nav li {
- 	float: right;
-	padding: 3px 8px;
-	margin: 30px 0;
-  list-style-type: none;
-	border-radius: 3px;
-	font-family: 'Muli', sans-serif;
-}
-
-#nav li button {
-	text-decoration: none;
-	color: #FFF;
-  font-family: 'Muli', sans-serif, bold;
-  font-size: 16px;
-}
-
+/* ---------- fixed nav bar ----------
+   position:sticky keeps the bar in view while scrolling (like the old
+   position:fixed) but stays in normal flow, replacing the old fixed bar +
+   150px .space spacer with a slim strip and a small main padding-top. */
 .fixed-nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100%;
-  height: 50px;
-  background-color: #191E28;
+	position: sticky;
+	top: 0;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	padding: 14px var(--nav-gutter);
+	background-color: var(--ink);
 }
 
+.brand {
+	color: #FFF;
+	font-weight: 700;
+	font-size: clamp(24px, 6vw, 40px);
+	line-height: 1;
+}
+
+/* The raised buttons hang past the banner's bottom edge and float over the
+   page, the way the old float:right + margin:30px layout dropped them below the
+   50px strip. main gets matching top padding so content clears them. */
+.menu {
+	position: absolute;
+	right: var(--nav-gutter);
+	bottom: -20px;
+	display: flex;
+	gap: 12px;
+}
+
+/* ---------- raised accent button (was .mdl-button--raised.mdl-button--accent) ---------- */
+.btn {
+	border: 0;
+	border-radius: var(--radius);
+	padding: 9px 16px;
+	background-color: var(--accent);
+	color: #FFF;
+	font-weight: 700;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	cursor: pointer;
+	box-shadow: var(--shadow-4dp);
+	transition: box-shadow .2s, background-color .2s, transform .05s;
+}
+
+.btn:hover {
+	background-color: var(--accent-dark);
+	box-shadow: var(--shadow-8dp);
+}
+
+.btn:focus-visible {
+	outline: 3px solid #FFF;
+	outline-offset: 2px;
+}
+
+.btn:active {
+	transform: translateY(1px);
+}
+
+/* current view: flat + deeper shade, reads as "pressed" next to the raised sibling */
+.btn[aria-current="page"] {
+	background-color: var(--accent-dark);
+	box-shadow: none;
+}
+
+/* ---------- content ---------- */
+main {
+	padding-top: 40px;
+	padding-bottom: 60px;
+}
+
+.view {
+	flex-direction: column;
+	align-items: center;
+	gap: 40px;
+	padding: 24px 16px 0;
+}
+
+/* `:not([hidden])` (not a global `[hidden] { ... !important }`) is what lets the
+   `hidden` attribute on the inactive <section> win over this display rule. */
+.view:not([hidden]) {
+	display: flex;
+}
+
+/* ---------- card (was .mdl-card.mdl-shadow--2dp) ---------- */
+.card {
+	width: min(90%, 600px);
+	overflow: hidden;
+	background-color: var(--surface);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-2dp);
+	text-align: left;
+}
+
+.card-media {
+	display: block;
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+
+.card-body {
+	padding: 16px 24px 24px;
+}
+
+/* ---------- text treatments ----------
+   .about and .link are <p>, so they need `text-align: left` to beat the
+   `p { text-align: justify }` rule; .desc is an <h3> and inherits left from .card. */
 .about {
-	font-size: 24px;
-	font-style: uppercase;
-  font-family: 'Muli', sans-serif;
-	line-height: 40px;
+	font-size: 1.25rem;
+	line-height: 1.7;
+	text-align: left;
 }
 
 .desc {
-  font-size: 18px;
-  font-style: uppercase;
-  font-family: 'Muli', sans-serif;
-  line-height: 40px;
-  text-align: left;
+	font-size: 1.125rem;
+	line-height: 1.6;
 }
 
 .link {
-  font-size: 12px;
-  font-style: uppercase;
-  font-family: 'Muli', sans-serif;
-  line-height: 4px;
-  text-align: left;
+	font-size: .8rem;
+	line-height: 1.8;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	text-align: left;
 }
 
-.space {
-	padding-top: 150px;
+@media (max-width: 600px) {
+	/* not enough width to float the buttons beside the name — stack them under
+	   it and drop the overhang */
+	.fixed-nav-bar {
+		display: block;
+		padding-bottom: 16px;
+	}
+
+	.menu {
+		position: static;
+		margin-top: 12px;
+	}
+
+	main {
+		padding-top: 20px;
+	}
+
+	.card {
+		width: 100%;
+	}
+
+	.view {
+		gap: 28px;
+		padding-top: 20px;
+	}
 }

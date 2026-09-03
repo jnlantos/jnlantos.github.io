@@ -2,123 +2,104 @@
 <html lang="en">
 
 <head>
-	<meta charset='utf-8' />
-    <meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#191E28">
 
-	<META NAME="author" CONTENT="Jasmin Lantos">
-	<META NAME="description" CONTENT="Jasmin Lantos Portfolio Website">
-	<META NAME="keywords" CONTENT="Jasmin Lantos, Lantos, jnlantos, portfolio, U of T, University of Toronto, Computer Science, Biology, CSC, specialist, major, resume">
-	<META NAME="revisit-after" CONTENT="30 DAYS">
-	<LINK REL="shortcut icon" href="images/favicon.ico" >
+	<meta name="author" content="Jasmin Lantos">
+	<meta name="description" content="Jasmin Lantos portfolio website">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Jasmin Lantos">
+	<meta property="og:description" content="Jasmin Lantos portfolio website">
+	<meta property="og:url" content="https://www.jnlantos.com/">
 
 	<title>Jasmin Lantos</title>
-	
-	<link href="css/nav.css" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Muli|Oxygen' rel='stylesheet' type='text/css'>
 
-	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+	<link rel="icon" href="images/favicon.ico">
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen:wght@400;700&display=swap">
 
-	<script src="scripts/main.js"></script>
+	<link rel="stylesheet" href="css/nav.css">
+
+	<script src="scripts/main.js" defer></script>
 </head>
 
 <body>
-	<div class="fixed-nav-bar">
-		<div id="nav">
-			<ul id="menu">
-				<p id="header">Jasmin Lantos</p>
-				<li id="projects"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goProjects()">Projects</button></li>
-				<li id="about"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="goAbout()">About</button></li>
-			</ul>
-		</div>
-	</div>
+	<header class="fixed-nav-bar">
+		<span class="brand">Jasmin Lantos</span>
+		<nav class="menu">
+			<button type="button" class="btn" data-view="about">About</button>
+			<button type="button" class="btn" data-view="projects">Projects</button>
+		</nav>
+	</header>
 
-	<style>
-		.demo-card-wide.mdl-card {
-		  width: 90%;
-		  align-items: center;
-		}
-
-		.project{
-		  width: 100%;
-		  height: 200px;
-		}
-
-		#project1 {
-		  background: url('images/project1.png') center /cover;
-		}
-
-		#project2 {
-		  background: url('images/project2.png') center / cover;
-		}
-
-		#project3 {
-		  background: url('images/project3.png') center / cover;
-		}
-	</style>
-
-	<div id="about_page">
-
-		<div class="space"></div>
-
-		<div class="mdl-grid">
-			<div class="mdl-layout-spacer"></div>
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<div class="mdl-card__title"></div>
-				  <div class="mdl-card__supporting-text">
-				  	<p class="about"> Hello there! I am currently a student at the University of Toronto studying Computer Science. It's a lot of fun! I also like to dabble in other disciplines now and then because I really enjoy learning new things. Feel free to check me out on <a href="http://www.linkedin.com/in/jasminlantos">linkedin</a> and <a href="http://www.github.com/jnlantos/">github</a> if you want to learn more about what I do!</p>
-				  </div>
+	<main>
+		<section class="view" data-view="about">
+			<article class="card">
+				<div class="card-body">
+					<p class="about">Hello there! I am currently a student at the University of Toronto studying
+						Computer Science. It's a lot of fun! I also like to dabble in other disciplines now and then
+						because I really enjoy learning new things. Feel free to check me out on
+						<a href="https://www.linkedin.com/in/jasminlantos">linkedin</a> and
+						<a href="https://www.github.com/jnlantos/">github</a> if you want to learn more about what I
+						do!</p>
 				</div>
-			<div class="mdl-layout-spacer"></div>
-		</div>
+			</article>
+		</section>
 
-	</div>
-
-	<div id="projects_page">
-
-		<div class="space"></div>
-
-		<div class="mdl-grid">
-			<div class="mdl-layout-spacer"></div>
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<div id="project3" class="mdl-card__title project"></div>
-				  <div class="mdl-card__supporting-text about">
-				  	<h1 class="about">Phoebe, Bot, and the BST</h1>
-				  	<h3 class="desc">A picture book pilot that teaches kids how to search a binary search tree through a story about a girl and her robot friend</h3>
-				  	<p class="link"><a class="desc" href="bst-digital-reader.html">Read the digital pilot</a></p>
-				  </div>
+		<section class="view" data-view="projects" hidden>
+			<article class="card">
+				<picture>
+					<source srcset="images/project3.webp" type="image/webp">
+					<img class="card-media" src="images/project3.png" width="1200" height="1494"
+						alt="Illustration from Phoebe, Bot, and the BST" loading="lazy" decoding="async">
+				</picture>
+				<div class="card-body">
+					<h1>Phoebe, Bot, and the BST</h1>
+					<h3 class="desc">A picture book pilot that teaches kids how to search a binary search tree
+						through a story about a girl and her robot friend</h3>
+					<p class="link"><a href="bst-digital-reader.html">Read the digital pilot</a></p>
 				</div>
-			<div class="mdl-layout-spacer"></div>
-		</div>
+			</article>
 
-		<div class="mdl-grid">
-			<div class="mdl-layout-spacer"></div>
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<div id="project2" class="mdl-card__title project"></div>
-				  <div class="mdl-card__supporting-text about">
-				  	<h1 class="about">Auroras</h1>
-				  	<h3 class="desc">A two player cooperative puzzle game inspired by slavic mythology and Doctor Who</h3>
-				  	<p class="link"><a class="desc" href="http://www.torontogamedevs.com/blog/auroras-the-cosmic-puzzle-game-you-need">Toronto Game Devs</a><br/><a class="desc" href="http://news.artsci.utoronto.ca/all-news/level-video-games-will-u-t-ocad-u-students-unveil-year/">U of T News</a><br/><a class="desc" href="http://www.citynews.ca/video/2017/04/05/video-level-up-showcases-student-video-game-creators/">City News</a></p>
-				  </div>
+			<article class="card">
+				<picture>
+					<source srcset="images/project2.webp" type="image/webp">
+					<img class="card-media" src="images/project2.png" width="1000" height="479"
+						alt="Auroras game artwork" loading="lazy" decoding="async">
+				</picture>
+				<div class="card-body">
+					<h1>Auroras</h1>
+					<h3 class="desc">A two player cooperative puzzle game inspired by slavic mythology and Doctor
+						Who</h3>
+					<p class="link">
+						<a href="https://www.torontogamedevs.com/blog/auroras-the-cosmic-puzzle-game-you-need">Toronto
+							Game Devs</a><br>
+						<a
+							href="https://news.artsci.utoronto.ca/all-news/level-video-games-will-u-t-ocad-u-students-unveil-year/">U
+							of T News</a><br>
+						<a href="https://www.citynews.ca/video/2017/04/05/video-level-up-showcases-student-video-game-creators/">City
+							News</a>
+					</p>
 				</div>
-			<div class="mdl-layout-spacer"></div>
-		</div>
+			</article>
 
-		<div class="mdl-grid">
-			<div class="mdl-layout-spacer"></div>
-				<div class="demo-card-wide mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-				<div id="project1" class="mdl-card__title project"></div>
-				  <div class="mdl-card__supporting-text">
-				  	<h1 class="about">VR Travel</h1>
-				  </div>
+			<article class="card">
+				<picture>
+					<source srcset="images/project1.webp" type="image/webp">
+					<img class="card-media" src="images/project1.png" width="1200" height="900"
+						alt="VR Travel project" loading="lazy" decoding="async">
+				</picture>
+				<div class="card-body">
+					<h1>VR Travel</h1>
 				</div>
-			<div class="mdl-layout-spacer"></div>
-		</div>
-	</div>
-
+			</article>
+		</section>
+	</main>
 </body>
 
 </html>
