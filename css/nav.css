@@ -1,16 +1,55 @@
-/* ---------- design tokens ---------- */
+/* ============================================================
+   Jasmin Lantos — the "nice notebook" zine
+   Two spreads (About / Projects) flipped with divider tabs.
+   Cream paper, white journal pages, pink accent. One stylesheet,
+   no framework, no build.
+   ============================================================ */
+
 :root {
-	--ink: #191E28;
-	--paper: #F5F5F5;
-	--surface: #FFFFFF;
-	--accent: #FF4081;        /* Material "indigo-pink" accent, carried over from the old MDL theme */
-	--accent-dark: #F50057;
-	--radius: 3px;
-	--nav-gutter: clamp(16px, 5vw, 50px);   /* nav padding-x and .menu right edge, kept equal */
-	--shadow-2dp: 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px rgba(0, 0, 0, .12);
-	--shadow-4dp: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
-	--shadow-8dp: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
+	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+	--font-sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	--paper: #F4EDDF;          /* cream page background */
+	--card: #FBF7EE;          /* white journal page */
+	--ink: #1A1B1F;
+	--ink-muted: #6C6A63;
+	--line: #D8D0BE;          /* hairline / stitch */
+	--accent: #FF3D71;         /* flower, title sweep, tape */
+	--accent-text: #C21E56;    /* links / accent text (AA on cream) */
+
+	--measure: 60ch;
+	--pad-x: clamp(1.25rem, 5vw, 3rem);
+	--pad-y: clamp(2.5rem, 7vh, 4.5rem);
+	--edge-x: max(var(--pad-x), calc((100% - 44rem) / 2 + var(--pad-x)));
+
+	/* jasmine-flower motif — masked so it always paints in --accent */
+	--flower: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cg%20fill='%23fff'%3E%3Cellipse%20cx='12'%20cy='6.7'%20rx='2.4'%20ry='4.7'/%3E%3Cellipse%20cx='12'%20cy='6.7'%20rx='2.4'%20ry='4.7'%20transform='rotate(72,12,12)'/%3E%3Cellipse%20cx='12'%20cy='6.7'%20rx='2.4'%20ry='4.7'%20transform='rotate(144,12,12)'/%3E%3Cellipse%20cx='12'%20cy='6.7'%20rx='2.4'%20ry='4.7'%20transform='rotate(216,12,12)'/%3E%3Cellipse%20cx='12'%20cy='6.7'%20rx='2.4'%20ry='4.7'%20transform='rotate(288,12,12)'/%3E%3Ccircle%20cx='12'%20cy='12'%20r='3'/%3E%3C/g%3E%3C/svg%3E");
 }
+
+/* Dark palette — auto with the OS (unless toggle forced light), explicit when
+   the toggle forced dark. Keep the two lists in sync. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--paper: #16161B;
+		--card: #1F1F27;
+		--ink: #EDE8DE;
+		--ink-muted: #9A968C;
+		--line: #33333D;
+		--accent-text: #FF6F9C;
+	}
+}
+
+:root[data-theme="dark"] {
+	--paper: #16161B;
+	--card: #1F1F27;
+	--ink: #EDE8DE;
+	--ink-muted: #9A968C;
+	--line: #33333D;
+	--accent-text: #FF6F9C;
+}
+
+/* ---------- reset / base ---------- */
 
 *,
 *::before,
@@ -18,186 +57,518 @@
 	box-sizing: border-box;
 }
 
+[hidden] {
+	display: none !important;
+}
+
+/* reserve the scrollbar gutter always, so switching to a taller view doesn't
+   shift the sticky header sideways */
+html {
+	scrollbar-gutter: stable;
+}
+
 body {
 	margin: 0;
-	background-color: var(--paper);
+	background: var(--paper);
 	color: var(--ink);
-	font-family: 'Mulish', sans-serif;
-	text-align: center;
-}
-
-p {
-	text-align: justify;
+	font-family: var(--font-sans);
 	font-size: 16px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
 }
 
-h1 {
-	font-family: 'Oxygen', sans-serif;
-	font-weight: 700;
-	text-align: left;
+/* faint paper tooth so the background isn't screen-flat — delete to remove */
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	opacity: 0.06;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] body::before,
+:root:not([data-theme="light"]) body::before {
+	opacity: 0.08;
+}
+
+img {
+	display: block;
+	max-width: 100%;
 }
 
 a {
-	color: var(--accent-dark);
+	color: var(--accent-text);
+	text-underline-offset: 0.15em;
 }
 
-button {
-	font-family: inherit;
-}
+/* ---------- header ---------- */
 
-/* ---------- fixed nav bar ----------
-   position:sticky keeps the bar in view while scrolling (like the old
-   position:fixed) but stays in normal flow, replacing the old fixed bar +
-   150px .space spacer with a slim strip and a small main padding-top. */
-.fixed-nav-bar {
+.site-header {
 	position: sticky;
 	top: 0;
-	z-index: 9999;
+	z-index: 20;
 	display: flex;
-	align-items: center;
-	padding: 14px var(--nav-gutter);
-	background-color: var(--ink);
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.85rem var(--edge-x) 0;
+	background: var(--paper);
+	background: color-mix(in srgb, var(--paper) 84%, transparent);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border-bottom: 1px solid var(--line);
 }
 
 .brand {
-	color: #FFF;
-	font-weight: 700;
-	font-size: clamp(24px, 6vw, 40px);
-	line-height: 1;
+	margin-bottom: 0.7rem;
+	font-family: var(--font-display);
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--ink);
+	text-decoration: none;
 }
 
-/* The raised buttons hang past the banner's bottom edge and float over the
-   page, the way the old float:right + margin:30px layout dropped them below the
-   50px strip. main gets matching top padding so content clears them. */
-.menu {
-	position: absolute;
-	right: var(--nav-gutter);
-	bottom: -20px;
+.header-right {
 	display: flex;
-	gap: 12px;
+	align-items: flex-end;
+	gap: 1rem;
 }
 
-/* ---------- raised accent button (was .mdl-button--raised.mdl-button--accent) ---------- */
-.btn {
-	border: 0;
-	border-radius: var(--radius);
-	padding: 9px 16px;
-	background-color: var(--accent);
-	color: #FFF;
-	font-weight: 700;
-	font-size: 15px;
+/* ---------- divider tabs ---------- */
+
+.tabs {
+	display: flex;
+	gap: 0.4rem;
+}
+
+.tab {
+	margin: 0;
+	padding: 0.45rem 0.9rem 0.55rem;
+	border: 1px solid var(--line);
+	border-radius: 7px 7px 2px 2px;
+	background: color-mix(in srgb, var(--card) 45%, transparent);
+	color: var(--ink-muted);
+	font-family: var(--font-mono);
+	font-size: 0.74rem;
+	font-weight: 500;
+	letter-spacing: 0.09em;
 	text-transform: uppercase;
-	letter-spacing: .04em;
 	cursor: pointer;
-	box-shadow: var(--shadow-4dp);
-	transition: box-shadow .2s, background-color .2s, transform .05s;
+	transition: color 0.15s, background 0.15s, box-shadow 0.15s;
 }
 
-.btn:hover {
-	background-color: var(--accent-dark);
-	box-shadow: var(--shadow-8dp);
+.tab:hover {
+	color: var(--ink);
 }
 
-.btn:focus-visible {
-	outline: 3px solid #FFF;
+.tab[aria-current="page"] {
+	background: var(--card);
+	color: var(--ink);
+	box-shadow: inset 0 2px 0 var(--accent);
+}
+
+.tab:focus-visible {
+	outline: 2px solid var(--accent-text);
 	outline-offset: 2px;
 }
 
-.btn:active {
-	transform: translateY(1px);
-}
+/* ---------- theme toggle ---------- */
 
-/* current view: flat + deeper shade, reads as "pressed" next to the raised sibling */
-.btn[aria-current="page"] {
-	background-color: var(--accent-dark);
-	box-shadow: none;
-}
-
-/* ---------- content ---------- */
-main {
-	padding-top: 40px;
-	padding-bottom: 60px;
-}
-
-.view {
-	flex-direction: column;
+.theme-toggle {
+	display: inline-flex;
 	align-items: center;
-	gap: 40px;
-	padding: 24px 16px 0;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	margin: 0 0 0.45rem;
+	padding: 0;
+	border: 0;
+	border-radius: 4px;
+	background: none;
+	color: var(--ink-muted);
+	cursor: pointer;
+	transition: color 0.18s;
 }
 
-/* `:not([hidden])` (not a global `[hidden] { ... !important }`) is what lets the
-   `hidden` attribute on the inactive <section> win over this display rule. */
-.view:not([hidden]) {
-	display: flex;
+.theme-toggle:hover {
+	color: var(--ink);
 }
 
-/* ---------- card (was .mdl-card.mdl-shadow--2dp) ---------- */
-.card {
-	width: min(90%, 600px);
+.theme-toggle:focus-visible {
+	outline: 2px solid var(--accent-text);
+	outline-offset: 2px;
+}
+
+.theme-toggle .icon-sun {
+	display: none;
+}
+
+.theme-toggle[aria-pressed="true"] .icon-sun {
+	display: block;
+}
+
+.theme-toggle[aria-pressed="true"] .icon-moon {
+	display: none;
+}
+
+/* ---------- shell / views ---------- */
+
+.shell {
+	padding: var(--pad-y) var(--pad-x) calc(var(--pad-y) * 1.2);
+	/* tilted pages poke past their column — clip, never scroll sideways */
+	overflow-x: clip;
+}
+
+/* ---------- name wordmark ---------- */
+
+.name {
+	margin: 0 0 1.5rem;
+	font-family: var(--font-display);
+	font-weight: 600;
+	font-size: clamp(2.2rem, 6vw, 3.4rem);
+	line-height: 1.05;
+	letter-spacing: -0.01em;
+	text-wrap: balance;
+}
+
+/* Real name kept for search engines, copy-paste and screen readers... */
+.vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
 	overflow: hidden;
-	background-color: var(--surface);
-	border-radius: var(--radius);
-	box-shadow: var(--shadow-2dp);
-	text-align: left;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* ...while the visible version swaps the dot on the "i" of Jasmin for the
+   jasmine-flower motif: a dotless "ı" with the flower where the tittle sits. */
+.ji {
+	position: relative;
+}
+
+.ji::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 100%;
+	width: 0.46em;
+	height: 0.46em;
+	transform: translate(-50%, 108%);
+	background-color: var(--accent);
+	-webkit-mask: var(--flower) center / contain no-repeat;
+	mask: var(--flower) center / contain no-repeat;
+}
+
+/* ---------- about page-card ---------- */
+
+.page {
+	position: relative;
+	max-width: 40rem;
+	margin: 1.25rem auto 0;
+	padding: clamp(1.5rem, 5vw, 3rem);
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 16px 34px -18px rgba(0, 0, 0, 0.28);
+	transform: rotate(-0.5deg);
+}
+
+.page::before {
+	content: "";
+	position: absolute;
+	top: -12px;
+	right: clamp(24px, 15%, 90px);
+	width: 96px;
+	height: 26px;
+	background: color-mix(in srgb, var(--accent) 18%, transparent);
+	border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+	transform: rotate(4deg);
+	pointer-events: none;
+}
+
+.bio {
+	max-width: var(--measure);
+	margin: 0 0 1.75rem;
+	font-size: 1.0625rem;
+	line-height: 1.75;
+}
+
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.75rem;
+	margin: 0;
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.links a {
+	padding-bottom: 2px;
+	border-bottom: 1px solid var(--line);
+	color: var(--ink);
+	text-decoration: none;
+	transition: color 0.18s, border-color 0.18s;
+}
+
+.links a:hover {
+	color: var(--accent-text);
+	border-bottom-color: var(--accent);
+}
+
+/* ---------- projects: stacked page-cards ---------- */
+
+.cards {
+	display: flex;
+	flex-direction: column;
+	gap: 2.25rem;
+	max-width: 44rem;
+	margin: 1.25rem auto 0;
+	padding-top: 1.25rem;
+}
+
+/* horizontal page-cards: a cropped image strip on the left, text on the right */
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	min-height: 176px;
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 16px 30px -20px rgba(0, 0, 0, 0.32);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:nth-child(1) {
+	transform: rotate(-1deg);
+}
+
+.card:nth-child(2) {
+	transform: rotate(0.7deg);
+}
+
+.card:nth-child(3) {
+	transform: rotate(-0.5deg);
+}
+
+.card:hover {
+	transform: rotate(0) translateY(-4px);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 28px 46px -22px rgba(0, 0, 0, 0.4);
+	z-index: 5;
+}
+
+/* one strip of washi tape at a top corner */
+.card::before {
+	content: "";
+	position: absolute;
+	z-index: 3;
+	top: -11px;
+	left: 22px;
+	width: 88px;
+	height: 24px;
+	background: color-mix(in srgb, var(--accent) 18%, transparent);
+	border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+	transform: rotate(-5deg);
+	pointer-events: none;
+}
+
+.card:nth-child(even)::before {
+	left: auto;
+	right: 22px;
+	transform: rotate(5deg);
 }
 
 .card-media {
-	display: block;
+	position: relative;
+	flex: 0 0 clamp(150px, 38%, 320px);
+	overflow: hidden;
+	border-right: 1px solid var(--line);
+	border-radius: 5px 0 0 5px;
+}
+
+.card-media img {
+	position: absolute;
+	inset: 0;
 	width: 100%;
-	height: 200px;
+	height: 100%;
 	object-fit: cover;
+	object-position: center;
 }
 
 .card-body {
-	padding: 16px 24px 24px;
+	flex: 1;
+	padding: 1.1rem 1.35rem 1.2rem;
 }
 
-/* ---------- text treatments ----------
-   .about and .link are <p>, so they need `text-align: left` to beat the
-   `p { text-align: justify }` rule; .desc is an <h3> and inherits left from .card. */
-.about {
-	font-size: 1.25rem;
-	line-height: 1.7;
-	text-align: left;
+.card-title {
+	display: inline-block;
+	margin: 0;
+	font-family: var(--font-display);
+	font-weight: 600;
+	font-size: 1.15rem;
+	line-height: 1.2;
+	/* neat highlighter: a full-height pink band wipes across the whole title on
+	   hover; transparent top/bottom keep it looking like a marker pass */
+	background-image: linear-gradient(to bottom,
+			transparent 6%,
+			color-mix(in srgb, var(--accent) 32%, transparent) 6%,
+			color-mix(in srgb, var(--accent) 32%, transparent) 94%,
+			transparent 94%);
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 0% 100%;
+	transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.desc {
-	font-size: 1.125rem;
-	line-height: 1.6;
+.card-title::before {
+	content: "";
+	display: inline-block;
+	width: 0.6em;
+	height: 0.6em;
+	margin-right: 0.4em;
+	vertical-align: 0.02em;
+	background-color: var(--accent);
+	-webkit-mask: var(--flower) center / contain no-repeat;
+	mask: var(--flower) center / contain no-repeat;
 }
 
-.link {
-	font-size: .8rem;
-	line-height: 1.8;
-	letter-spacing: .06em;
+.card:hover .card-title,
+.card:focus-within .card-title {
+	background-size: 100% 100%;
+}
+
+.card-title a {
+	color: var(--ink);
+	text-decoration: none;
+}
+
+/* BST: the title link stretches over the whole card */
+.card.is-linked {
+	cursor: pointer;
+}
+
+.card.is-linked .card-title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 4;
+}
+
+.card:hover .card-title a {
+	color: var(--accent-text);
+}
+
+.card-desc {
+	margin: 0.45rem 0 0;
+	font-size: 0.9rem;
+	line-height: 1.5;
+	color: var(--ink-muted);
+}
+
+.card-cue {
+	margin: 0.75rem 0 0;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
 	text-transform: uppercase;
-	text-align: left;
+	color: var(--accent-text);
 }
 
-@media (max-width: 600px) {
-	/* not enough width to float the buttons beside the name — stack them under
-	   it and drop the overhang */
-	.fixed-nav-bar {
-		display: block;
-		padding-bottom: 16px;
-	}
+.card-tagword {
+	margin: 0.75rem 0 0;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--ink-muted);
+}
 
-	.menu {
-		position: static;
-		margin-top: 12px;
-	}
+.card-press {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	margin: 0.7rem 0 0;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.02em;
+}
 
-	main {
-		padding-top: 20px;
-	}
+.card-press a {
+	position: relative;
+	z-index: 4;
+	color: var(--accent-text);
+	text-decoration: none;
+	border-bottom: 1px solid var(--line);
+	padding-bottom: 1px;
+	align-self: flex-start;
+}
 
+.card-press a:hover {
+	border-bottom-color: var(--accent);
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+	padding: 1.5rem var(--edge-x) 2.5rem;
+	border-top: 1px solid var(--line);
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--ink-muted);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 620px) {
+	/* stack the image on top of the text on narrow screens */
 	.card {
-		width: 100%;
+		flex-direction: column;
+		min-height: 0;
 	}
 
-	.view {
-		gap: 28px;
-		padding-top: 20px;
+	.card-media {
+		flex: none;
+		aspect-ratio: 16 / 9;
+		border-right: none;
+		border-bottom: 1px solid var(--line);
+		border-radius: 5px 5px 0 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.site-header {
+		flex-wrap: wrap;
+		gap: 0.5rem 1rem;
+	}
+
+	.header-right,
+	.tabs {
+		gap: 0.4rem;
+	}
+
+	.brand {
+		font-size: 1.05rem;
+	}
+}
+
+/* ---------- motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
 	}
 }
